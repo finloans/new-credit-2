@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinLoans Estimated Credit Score Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6f7ff; /* Vibrant background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .calculator-container {
+            background-color: #fff;
+            padding: 20px;
+            border: 3px solid #2a9df4; /* Bold border */
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+        }
+
+        .logo {
+            width: 100%; /* Make the logo stretch across the container */
+            height: calc(80px + 0.8cm); /* Medium height for the logo, increased by 0.8cm */
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 1.5em;
+            color: red; /* Red text for the calculator name */
+            border-bottom: 2px solid #2a9df4; /* Border below the name */
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+            color: #555;
+            font-weight: bold;
+        }
+
+        p.specification {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #2a9df4;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2a9df4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .tips {
+            margin-top: 10px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .disclaimer {
+            font-size: 0.9em;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #ff0000; /* Bold red text for contact */
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .calculator-container {
+                max-width: 100%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.2em;
+            }
+
+            button {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <!-- FinLoans Logo -->
+        <img src="finloans_logo.png" alt="FinLoans Logo" class="logo">
+
+        <!-- Calculator Name -->
+        <h1>FinLoans Estimated Credit Score Calculator</h1>
+
+        <!-- Credit Score Form -->
+        <form id="credit-score-estimator">
+            <label for="borrower-name">Borrower's Name</label>
+            <input type="text" id="borrower-name" name="borrower-name" required placeholder="Enter your name">
+
+            <label for="borrower-phone">Phone Number</label>
+            <input type="text" id="borrower-phone" name="borrower-phone" required placeholder="Enter your phone number">
+
+            <label for="borrower-address">Address with Pincode</label>
+            <input type="text" id="borrower-address" name="borrower-address" required placeholder="Enter your address with pincode">
+
+            <label for="borrower-email">Email</label>
+            <input type="email" id="borrower-email" name="borrower-email" required placeholder="Enter your email">
+
+            <label for="loan-requirement">Loan Requirement Type</label>
+            <select id="loan-requirement" name="loan-requirement" required>
+                <option value="">Select Loan Type</option>
+                <option value="Home Loan">Home Loan</option>
+                <option value="Car Loan">Car Loan</option>
+                <option value="Personal Loan">Personal Loan</option>
+                <option value="Business Loan">Business Loan</option>
+            </select>
+
+            <!-- Credit Score Factors -->
+            <label for="payment-history">Payment History</label>
+            <p class="specification">Your record of on-time or missed payments. On-time payments positively affect your score.</p>
+            <select id="payment-history" name="payment-history" required>
+                <option value="1">No missed payments</option>
+                <option value="0.8">Missed 1 payment</option>
+                <option value="0.5">Missed more than 1 payment</option>
+            </select>
+
+            <label for="credit-utilization">Credit Utilization</label>
+            <p class="specification">The percentage of your available credit being used. Lower utilization is better.</p>
+            <select id="credit-utilization" name="credit-utilization" required>
+                <option value="1">Less than 30%</option>
+                <option value="0.7">Between 30%-50%</option>
+                <option value="0.4">More than 50%</option>
+            </select>
+
+            <label for="credit-history">Length of Credit History</label>
+            <p class="specification">How long you've had credit. Longer history is generally better for your score.</p>
+            <select id="credit-history" name="credit-history" required>
+                <option value="1">More than 7 years</option>
+                <option value="0.8">3-7 years</option>
+                <option value="0.5">Less than 3 years</option>
+            </select>
+
+            <label for="credit-types">Types of Credit</label>
+            <p class="specification">The variety of credit accounts (e.g., credit cards, loans). A good mix helps your score.</p>
+            <select id="credit-types" name="credit-types" required>
+                <option value="1">Good mix (credit cards, loans)</option>
+                <option value="0.8">Only credit cards</option>
+                <option value="0.5">Only loans</option>
+            </select>
+
+            <label for="new-credit">New Credit Inquiries</label>
+            <p class="specification">The number of recent credit applications. Fewer inquiries are better.</p>
+            <select id="new-credit" name="new-credit" required>
+                <option value="1">0-1 inquiries</option>
+                <option value="0.7">2-3 inquiries</option>
+                <option value="0.4">More than 3 inquiries</option>
+            </select>
+
+            <!-- Consent checkbox -->
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">I give consent to Finloans for the collection and storage of my data.</label>
+
+            <button type="submit">Estimate My Credit Score</button>
+        </form>
+
+        <!-- Result Display -->
+        <div class="result" id="score-result"></div>
+        <div class="tips" id="score-tips"></div>
+        <p class="disclaimer" id="disclaimer">Please note: This score is provided for informational and educational purposes only and should not be compared to official credit scores from any credit reporting agencies.</p>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <p>Email: <a href="mailto:support@finloans.in">support@finloans.in</a></p>
+            <p>Mobile: 9827603070</p>
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="finloans-credit-score-calculator.js"></script>
+</body>
+</html>
+
